@@ -79,8 +79,10 @@
 #include <string>
 #include <vector>
 
-#include "SIMD_TYPES.hpp"
-#include "WavePropagation.hpp"
+// #include "SIMD_TYPES.hpp"
+// #include "WavePropagation.hpp"
+#include "SIMDTypesDouble.hpp"
+#include "WavePropagationSolver.hpp"
 
 namespace solver {
   class AugRie_SIMD;

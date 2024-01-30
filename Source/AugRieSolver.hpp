@@ -285,7 +285,7 @@ namespace Solvers {
 #ifndef NDEBUG
       if (wetDryState_ == WavePropagationSolver<T>::WetDryState::DryWetWall) {
         assert(std::fabs(o_hUpdateLeft) < zeroTol_ && std::fabs(o_huUpdateLeft) < zeroTol_);
-      } else if (wetDryState == WavePropagationSolver<T>::WetDryState::WetDryWall) {
+      } else if (wetDryState_ == WavePropagationSolver<T>::WetDryState::WetDryWall) {
         assert(std::fabs(o_hUpdateRight) < zeroTol_ && std::fabs(o_huUpdateRight) < zeroTol_);
       }
 #endif
@@ -452,7 +452,7 @@ namespace Solvers {
         extEinfeldtSpeeds[0] = std::min(roeSpeeds[0], middleStateSpeeds_[1]);
         extEinfeldtSpeeds[1] = std::max(characteristicSpeeds[1], roeSpeeds[1]);
 
-        assert(middleStateSpeeds[0] < extEinfeldtSpeeds[1]);
+        assert(middleStateSpeeds_[0] < extEinfeldtSpeeds[1]);
       } else if (hRight_ < dryTol_) { // Ignore undefined speeds
         extEinfeldtSpeeds[0] = std::min(characteristicSpeeds[0], roeSpeeds[0]);
         extEinfeldtSpeeds[1] = std::max(roeSpeeds[1], middleStateSpeeds_[0]);
@@ -773,7 +773,7 @@ namespace Solvers {
                             - T(0.25) * gravity_ * (hMiddle_ - hRight) / (lsqrtTermH[1] * hMiddle_ * hMiddle_);
 
           hMiddle_ = hMiddle_ - phi / derivativePhi; // Newton step
-          assert(hMiddle >= dryTol_);
+          assert(hMiddle_ >= dryTol_);
 
           // if (i == maxNumberOfNewtonIterations_ - 1) {
           //   std::cerr << "Newton-Method did not converge" << std::endl;
